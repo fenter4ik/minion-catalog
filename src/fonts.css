@@ -1,0 +1,6 @@
+/* Подключение Jomhuria из Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+
+body, html, #root, .App {
+  font-family: 'Jomhuria', 'Segoe UI', Arial, sans-serif;
+}
