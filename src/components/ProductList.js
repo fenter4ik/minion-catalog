@@ -5,16 +5,17 @@ import minion1low from '../assets/Minions1low.png';
 import minion2high from '../assets/Minions2high.png';
 import minion2low from '../assets/Minions2low.png';
 import item from '../assets/item.png';
+import item2 from '../assets/item2.png'
 
 const products = [
-  { name: 'NAME', desc: '', img: minion1high },
-  { name: 'NAME', desc: '', img: minion1low },
-  { name: 'NAME', desc: '', img: minion2high },
-  { name: 'NAME', desc: '', img: minion2low },
+  { name: 'NAME', desc: '', img: item },
+  { name: 'NAME', desc: '', img: item2 },
+  { name: 'NAME', desc: '', img: item },
+  { name: 'NAME', desc: '', img: item2 },
   { name: 'NAME', desc: '', img: item },
   { name: 'NAME', desc: '', img: item },
-  { name: 'NAME', desc: '', img: item },
-  { name: 'NAME', desc: '', img: item },
+  { name: 'NAME', desc: '', img: item2 },
+  { name: 'NAME', desc: '', img: item2},
   { name: 'NAME', desc: '', img: item },
 ];
 

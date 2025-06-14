@@ -18,11 +18,13 @@ const Categories = () => (
 		<div className="categories-list-mockup">
 			{categories.map((cat, idx) => (
 				<div className="category-card-mockup" key={idx}>
-					<img
-						src={cat.img}
-						alt={cat.label}
-						className="category-img-mockup"
-					/>
+					<div className="category-img-bg">
+						<img
+							src={cat.img}
+							alt={cat.label}
+							className="category-img-mockup"
+						/>
+					</div>
 					<div className="category-label-mockup">{cat.label}</div>
 				</div>
 			))}
