@@ -117,6 +117,35 @@ body, html, #root, .App {
   padding: 0 24px;
 }
 
+/* Анимация появления header */
+.header-animate {
+  animation: headerFadeIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes headerFadeIn {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Анимация заголовка */
+.header-title-animate {
+  animation: titlePopIn 1.1s 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes titlePopIn {
+  0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+  80% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Анимация изображения */
+.header-img-animate {
+  animation: imgSlideIn 1.2s 0.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes imgSlideIn {
+  0% { opacity: 0; transform: translateX(-60px) scale(0.9) rotate(-8deg); }
+  80% { opacity: 1; transform: translateX(8px) scale(1.05) rotate(2deg); }
+  100% { opacity: 1; transform: translateX(0) scale(1) rotate(0); }
+}
+
 .categories {
   padding: 32px 0 16px 0;
   text-align: center;
@@ -429,6 +458,8 @@ body, html, #root, .App {
   background: #fff;
   margin: 0;
   padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 .header-img-mockup {
   width: 100vw;
@@ -436,6 +467,26 @@ body, html, #root, .App {
   height: 260px;
   object-fit: cover;
   display: block;
+  z-index: 1;
+  position: relative;
+  animation: headerWaveIn 1.2s cubic-bezier(.7,-0.2,.3,1.4) both;
+}
+@keyframes headerWaveIn {
+  0% {
+    opacity: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transform: scaleY(0.7) skewY(8deg);
+  }
+  60% {
+    opacity: 1;
+    clip-path: polygon(0 60%, 100% 80%, 100% 100%, 0 100%);
+    transform: scaleY(1.08) skewY(-4deg);
+  }
+  100% {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: none;
+  }
 }
 .header-title-bg-mockup {
   width: 100vw;
@@ -455,13 +506,25 @@ body, html, #root, .App {
   margin: 32px 0 12px 0;
   letter-spacing: 1px;
   line-height: 1;
+  opacity: 0;
+  transform: rotateY(60deg) scale(0.7);
 }
-.header-title-mockup.header-title-left {
-  text-align: left;
-  width: 100vw;
-  margin-left: 48px;
-  margin-right: 0;
-  display: block;
+.header-title-mockup.header-title-animated {
+  animation: headerTitleFlipIn 1.1s 0.3s cubic-bezier(.23,1,.32,1) both;
+}
+@keyframes headerTitleFlipIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(60deg) scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: rotateY(-12deg) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .categories-mockup {
@@ -515,6 +578,28 @@ body, html, #root, .App {
   box-shadow: 0 4px 16px #0001;
   padding: 18px 0 0 0;
   position: relative;
+  opacity: 0;
+  transform: translateX(120vw) scale(0.7) rotate(18deg);
+}
+.category-card-mockup.category-jump-in {
+  animation: categoryJumpIn 0.85s cubic-bezier(.7,-0.2,.3,1.4) forwards;
+}
+@keyframes categoryJumpIn {
+  0% {
+    opacity: 0;
+    transform: translateX(120vw) scale(0.7) rotate(18deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-18px) scale(1.08) rotate(-8deg);
+  }
+  80% {
+    transform: translateX(8px) scale(0.98) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 .category-img-bg {
   width: 180px;
@@ -1136,7 +1221,7 @@ body, html, #root, .App {
   }
   .product-card-mockup {
     width: 95vw;
-    height: auto;
+    height: 1;
     min-width: unset;
     max-width: unset;
   }
@@ -1175,5 +1260,109 @@ body, html, #root, .App {
   .footer-minion-col {
     min-width: 120px;
     font-size: 0.9rem;
+  }
+}
+
+/* --- Анимация шатания карточки при наведении --- */
+.product-card:hover, .product-card-mockup:hover {
+  animation: shakeCard 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.22), 0 0 0 4px #ffe60044;
+}
+@keyframes shakeCard {
+  10%, 90% { transform: translateX(-2px) rotate(-1deg); }
+  20%, 80% { transform: translateX(4px) rotate(2deg); }
+  30%, 50%, 70% { transform: translateX(-6px) rotate(-2deg); }
+  40%, 60% { transform: translateX(6px) rotate(2deg); }
+  100% { transform: none; }
+}
+
+/* --- Пульсация тени карточки при наведении --- */
+.product-card:hover, .product-card-mockup:hover {
+  animation: shakeCard 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both, pulseShadow 1.2s infinite alternate;
+}
+@keyframes pulseShadow {
+  from { box-shadow: 0 12px 40px rgba(0,0,0,0.18), 0 0 0 0 #ffe60044; }
+  to { box-shadow: 0 18px 60px rgba(0,0,0,0.28), 0 0 0 8px #ffe60066; }
+}
+
+/* --- Прыгающая кнопка при наведении на карточку --- */
+.product-card:hover button, .product-card-mockup:hover button {
+  animation: jumpBtn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes jumpBtn {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-10px) scale(1.08); }
+  50% { transform: translateY(-16px) scale(1.12); }
+  70% { transform: translateY(-10px) scale(1.08); }
+  100% { transform: translateY(0); }
+}
+
+/* Убираем обводку и добавляем яркую тень */
+.product-card-mockup:hover {
+  box-shadow: 0 12px 40px 0 rgba(255, 230, 0, 0.45), 0 0 32px 8px #ffe60099, 0 2px 32px 0 #0002;
+  border: none;
+}
+
+/* --- Анимация метания для категорий --- */
+.category-card-mockup {
+  will-change: transform;
+}
+.category-card-mockup.is-mix {
+  animation: categoryMix 0.7s cubic-bezier(.7,-0.2,.3,1.4);
+}
+.category-card-mockup.is-return {
+  animation: categoryReturn 0.8s cubic-bezier(.23,1.2,.32,1);
+}
+@keyframes categoryMix {
+  0% { filter: brightness(1) drop-shadow(0 0 0 #ffe600); }
+  40% { filter: brightness(1.15) drop-shadow(0 0 16px #ffe60088); }
+  80% { filter: brightness(1.1) drop-shadow(0 0 8px #ffe60055); }
+  100% { filter: brightness(1) drop-shadow(0 0 0 #ffe600); }
+}
+@keyframes categoryReturn {
+  0% { filter: brightness(1.1) drop-shadow(0 0 8px #ffe60055); }
+  100% { filter: brightness(1) drop-shadow(0 0 0 #ffe600); }
+}
+
+@media (max-width: 600px) {
+  .product-card:hover, .product-card-mockup:hover,
+  .product-card:hover button, .product-card-mockup:hover button,
+  .category-card-mockup.is-mix, .category-card-mockup.is-return {
+    animation: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+/* --- Анимация приклеивания для стикера в футере --- */
+.footer-minion-sticker {
+  transform: rotate(-15deg); /* всегда чуть под наклоном */
+  transition: transform 0.7s cubic-bezier(.7,-0.2,.3,1.4), box-shadow 0.4s, filter 0.4s;
+  z-index: 2;
+}
+.footer-minion-sticker.sticker-glue-in {
+  animation: stickerGlueIn 0.8s cubic-bezier(.7,-0.2,.3,1.4) both;
+  box-shadow: 0 8px 32px #0003, 0 0 0 8px #ffe06677;
+  filter: drop-shadow(0 0 16px #ffe066cc);
+}
+@keyframes stickerGlueIn {
+  0% {
+    transform: scale(1.2) rotate(-30deg) translateY(-80px) skewY(-12deg);
+    opacity: 0.2;
+    filter: blur(2px) brightness(1.2);
+  }
+  60% {
+    transform: scale(1.05) rotate(-18deg) translateY(8px) skewY(2deg);
+    opacity: 1;
+    filter: blur(0.5px) brightness(1.08);
+  }
+  80% {
+    transform: scale(0.98) rotate(-15deg) translateY(-4px) skewY(-2deg);
+    filter: none;
+  }
+  100% {
+    transform: rotate(-15deg);
+    opacity: 1;
+    filter: none;
   }
 }

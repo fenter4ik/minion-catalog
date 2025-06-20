@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import minion1high from '../assets/Minions1high.png';
 import minion1low from '../assets/Minions1low.png';
 import minion2high from '../assets/Minions2high.png';
@@ -11,35 +11,54 @@ const categories = [
 	{ label: 'Two-Eyed Low Minions', img: minion2low },
 ];
 
-const Categories = () => (
-	<section className="categories-mockup">
-		<h2 className="categories-title-mockup">CATEGORIES</h2>
-		<div className="categories-line-mockup" />
-		<div className="categories-list-mockup">
-			{categories.map((cat, idx) => (
-				<div className="category-card-mockup" key={idx}>
-					<div className="category-img-bg">
-						<img
-							src={cat.img}
-							alt={cat.label}
-							className="category-img-mockup"
-						/>
-					</div>
-					<div className="category-label-mockup">{cat.label}</div>
-				</div>
-			))}
-		</div>
-		<div className="categories-indicator-mockup">
-			<span className="categories-search-label">Search</span>
-			<div className="categories-indicator-dots">
-				<span className="dot dot-filled" />
-				<span className="dot dot-filled" />
-				<span className="slider-tile" />
-				<span className="dot dot-outline" />
-				<span className="dot dot-outline" />
-			</div>
-		</div>
-	</section>
-);
+const Categories = () => {
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    // Поочередно запускаем анимацию для каждой карточки
+    cardRefs.current.forEach((el, idx) => {
+      if (el) {
+        setTimeout(() => {
+          el.classList.add('category-jump-in');
+        }, 180 * idx + 100); // задержка между карточками
+      }
+    });
+  }, []);
+
+  return (
+    <section className="categories-mockup">
+      <h2 className="categories-title-mockup">CATEGORIES</h2>
+      <div className="categories-line-mockup" />
+      <div className="categories-list-mockup">
+        {categories.map((cat, idx) => (
+          <div
+            className="category-card-mockup"
+            key={idx}
+            ref={el => cardRefs.current[idx] = el}
+          >
+            <div className="category-img-bg">
+              <img
+                src={cat.img}
+                alt={cat.label}
+                className="category-img-mockup"
+              />
+            </div>
+            <div className="category-label-mockup">{cat.label}</div>
+          </div>
+        ))}
+      </div>
+      <div className="categories-indicator-mockup">
+        <span className="categories-search-label">Search</span>
+        <div className="categories-indicator-dots">
+          <span className="dot dot-filled" />
+          <span className="dot dot-filled" />
+          <span className="slider-tile" />
+          <span className="dot dot-outline" />
+          <span className="dot dot-outline" />
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Categories;

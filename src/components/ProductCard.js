@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductCard = ({ name, desc, img, isFooter }) => (
-  <div className={isFooter ? 'slot footer-card-productcard-slot' : 'slot'}>
+  <div className={isFooter ? 'slot footer-card-productcard-slot' : 'slot product-card-mockup'}>
     {!isFooter && <div className="rectangle12"></div>}
     {!isFooter && <div className="rectangle15"></div>}
     {!isFooter && <div className="rectangle13"></div>}

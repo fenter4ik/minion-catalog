@@ -172,6 +172,38 @@ code {
 .footer-minion-col a:hover {
   color: #FFD54F;
 }
+.floating-bananas-container {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: auto;
+  bottom: 0;
+  width: 100%;
+  height: 50%; /* половина футера */
+  z-index: 2;
+  overflow: hidden;
+}
+
+.floating-banana {
+  position: absolute;
+  bottom: 0; /* стартуют с самого низа футера */
+  animation: float-banana 7s linear forwards;
+  opacity: 0.85;
+}
+
+@keyframes float-banana {
+  0% {
+    transform: translateY(0) scale(1) rotate(var(--angle, 0deg));
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%) scale(1.1) rotate(var(--angle, 0deg)); /* до середины футера */
+    opacity: 0;
+  }
+}
 @media (max-width: 900px) {
   .footer-minion-content {
     flex-direction: column;
