@@ -56,7 +56,7 @@ const Categories = () => {
           <span className="dot dot-outline" />
           <span className="dot dot-outline" />
         </div>
-      </div>
+      </div>c:\Users\user\Desktop\,\Практика4\minonseling\minon\src\assets\bob.png
     </section>
   );
 };
