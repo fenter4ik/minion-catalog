@@ -8,26 +8,32 @@ import item from '../assets/item.png';
 import item2 from '../assets/item2.png';
 import item3 from '../assets/bob.png'
 
+// Добавляем поле category для фильтрации
 const products = [
-  { name: 'Bob', desc: 'Banananana Banana Bananananana 🍌🍌🍌😜', img: item },
-  { name: 'Kevin', desc: 'Poopaye! Gelatooo! Bello! 🍦😎✨', img: item2 },
-  { name: 'Stuart', desc: 'La papaya! Para tuuu! 🍉😂🎉', img: item3 },
-  { name: 'Bob', desc: 'Underwear! Ba-ba-ba! 👙🤣🎶', img: item3 },
-  { name: 'Stuart', desc: 'Tulaliloo ti amo! ❤️😍🎈', img: item2 },
-  { name: 'Kevin', desc: 'Bee-do bee-do! Bee-do bee-do! 🚨🐝🎵', img: item },
-  { name: 'Stuart', desc: 'Tank yuu! Dank uuu! 🙏😆👍', img: item3 },
-  { name: 'Bob', desc: 'Poopaye! Gelatooo! Bello! 🍦😎✨', img: item2},
-  { name: 'Stuart', desc: 'Banananana Banana Bananananana 🍌🍌🍌😜', img: item },
+  { name: 'Bob', desc: 'Banananana Banana Bananananana 🍌🍌🍌😜', img: item, category: 'one-tall' },
+  { name: 'Kevin', desc: 'Poopaye! Gelatooo! Bello! 🍦😎✨', img: item2, category: 'one-low' },
+  { name: 'Stuart', desc: 'La papaya! Para tuuu! 🍉😂🎉', img: item3, category: 'two-tall' },
+  { name: 'Bob', desc: 'Underwear! Ba-ba-ba! 👙🤣🎶', img: item3, category: 'two-tall' },
+  { name: 'Stuart', desc: 'Tulaliloo ti amo! ❤️😍🎈', img: item2, category: 'one-low' },
+  { name: 'Kevin', desc: 'Bee-do bee-do! Bee-do bee-do! 🚨🐝🎵', img: item, category: 'one-tall' },
+  { name: 'Stuart', desc: 'Tank yuu! Dank uuu! 🙏😆👍', img: item3, category: 'two-tall' },
+  { name: 'Bob', desc: 'Poopaye! Gelatooo! Bello! 🍦😎✨', img: item2, category: 'one-low' },
+  { name: 'Stuart', desc: 'Banananana Banana Bananananana 🍌🍌🍌😜', img: item, category: 'one-tall' },
 ];
 
-const ProductList = () => (
-  <section className="product-section-mockup">
-    <div className="product-grid-mockup">
-      {products.map((p, i) => (
-        <ProductCard key={i} {...p} />
-      ))}
-    </div>
-  </section>
-);
+const ProductList = ({ selectedCategory }) => {
+  const filtered = selectedCategory
+    ? products.filter(p => p.category === selectedCategory)
+    : products;
+  return (
+    <section className="product-section-mockup">
+      <div className="product-grid-mockup">
+        {filtered.map((p, i) => (
+          <ProductCard key={i} {...p} />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default ProductList;

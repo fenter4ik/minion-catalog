@@ -5,25 +5,25 @@ import minion2high from '../assets/Minions2high.png';
 import minion2low from '../assets/Minions2low.png';
 
 const categories = [
-	{ label: 'One-Eyed Tall Minions', img: minion1high },
-	{ label: 'One-eyed Low Minions', img: minion1low },
-	{ label: 'Two-Eyed Tall Minions', img: minion2high },
-	{ label: 'Two-Eyed Low Minions', img: minion2low },
+	{ label: 'One-Eyed Tall Minions', img: minion1high, key: 'one-tall' },
+	{ label: 'One-eyed Low Minions', img: minion1low, key: 'one-low' },
+	{ label: 'Two-Eyed Tall Minions', img: minion2high, key: 'two-tall' },
+	{ label: 'Two-Eyed Low Minions', img: minion2low, key: 'two-low' },
 ];
 
-const Categories = () => {
+const Categories = ({ selectedCategory, onSelectCategory }) => {
   const cardRefs = useRef([]);
 
   useEffect(() => {
-    // Поочередно запускаем анимацию для каждой карточки
     cardRefs.current.forEach((el, idx) => {
       if (el) {
+        el.classList.remove('category-jump-in');
         setTimeout(() => {
           el.classList.add('category-jump-in');
-        }, 180 * idx + 100); // задержка между карточками
+        }, 180 * idx + 100);
       }
     });
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <section className="categories-mockup">
@@ -32,15 +32,20 @@ const Categories = () => {
       <div className="categories-list-mockup">
         {categories.map((cat, idx) => (
           <div
-            className="category-card-mockup"
-            key={idx}
+            key={cat.key}
             ref={el => cardRefs.current[idx] = el}
+            className={
+              'category-card-mockup' + (selectedCategory === cat.key ? ' category-card-mockup-selected' : '')
+            }
+            onClick={() => onSelectCategory(selectedCategory === cat.key ? null : cat.key)}
+            style={{ cursor: 'pointer' }}
           >
             <div className="category-img-bg">
               <img
                 src={cat.img}
                 alt={cat.label}
                 className="category-img-mockup"
+                draggable={false}
               />
             </div>
             <div className="category-label-mockup">{cat.label}</div>
@@ -56,7 +61,7 @@ const Categories = () => {
           <span className="dot dot-outline" />
           <span className="dot dot-outline" />
         </div>
-      </div>c:\Users\user\Desktop\,\Практика4\minonseling\minon\src\assets\bob.png
+      </div>
     </section>
   );
 };

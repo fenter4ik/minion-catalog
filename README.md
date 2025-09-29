@@ -1,3 +1,36 @@
+# Minion Catalog
+
+Каталог миньонов с интерактивным выбором категорий. Реализовано на React, с анимациями и современным UI.
+
+## Скриншот
+![header](image.png)
+![category](image-1.png)
+![minons](image-2.png)
+![footer](image-3.png)
+## Установка и запуск
+
+```bash
+git clone https://github.com/yourusername/minion-catalog.git
+cd minion-catalog
+npm install
+npm start
+```
+
+## Технологии
+
+- React
+- CSS
+- JS
+## Структура
+
+- Категории миньонов
+- Карточки товаров/персонажей
+- Анимации при выборе
+
+## Лицензия
+
+Проект распространяется под лицензией MIT. Подробнее см. файл LICENSE.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
